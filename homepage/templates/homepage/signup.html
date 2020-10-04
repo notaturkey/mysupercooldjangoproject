@@ -8,9 +8,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 <style>
+    .alert {
+        padding: 1%;
+    }
     .container-fluid {
-      background: 	#dccfff;
-      padding: 1%;
+        background: 	#dccfff;
+        padding: 1%;
     }
     body{
         background: black;
@@ -25,6 +28,7 @@
 </head>
 
 <body >
+    <!-- BANNER -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/homepage/">PlayMyList</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,12 +37,33 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+
+            {% if request.user.is_authenticated %}
             <li class="nav-item active">
-              <a class="nav-link" href="/login/">Log in <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/account">{{request.user.username}}<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">Log in<span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+
           </ul>
         </div>
     </nav>
+
+    {% for message in messages %}
+        <br>
+        <div class="alert alert-success" style="padding: 1%;">
+            <a class="close" href="#" data-dismiss="alert" >×</a>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <!-- BANNER -->
     
     
     <div class = "container-fluid">
