@@ -24,7 +24,7 @@ def login(request):
         username = request.POST['inputUser']
         password = request.POST['inputPass']
         user = authenticate(request, username=username, password=password)
-        
+
         if user is not None:
             # A backend authenticated the credentials
             auth_login(request, user)
@@ -33,7 +33,7 @@ def login(request):
             # No backend authenticated the credentials
             messages.error(request,'username or password not correct')
             return redirect('login')
-    
+
     return render(request, 'homepage/login.html')
 
 
@@ -42,20 +42,23 @@ def signup(request):
         email = request.POST['inputEmail']
         username = request.POST['inputUser']
         password = request.POST['inputPass']
-        
+
         if User.objects.filter(username=username).exists():
             messages.error(request,'username is taken, try another')
             return redirect('signup')
-        
+
         user = User.objects.create_user(username,email=email, password=password)
         user.save()
         messages.error(request,'Account Created, Thanks for signing up!')
         return render(request, 'homepage/index.html')
-
     return render(request, 'homepage/signup.html')
 
 def thanks(request):
     return render(request, 'homepage/thanks.html')
+
+def search(request, userName):
+    pass
+    return render(request, 'homepage/search.html')
 
 def logout(request):
     auth_logout(request)

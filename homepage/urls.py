@@ -10,5 +10,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('account/', views.account, name='account'),
     path('thanks/' , views.thanks, name='thanks'),
-    path('signup/', views.signup, name='signup')
+    path('signup/', views.signup, name='signup'),
+    path('search/<str:userName>/', views.search, name='search')
+    
 ]
